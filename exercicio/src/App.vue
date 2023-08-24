@@ -1,25 +1,18 @@
 <template>
-  <v-layout>
-    <v-app-bar color="#d6249f" v-if="renderizarMenu">
-      <v-app-bar-title class="titleMenu">Instagram</v-app-bar-title>
-
-      <v-btn icon>
-        <router-link to="/posts/novo">
-          <v-icon color="#FFF">mdi-email</v-icon>
-        </router-link>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
-  </v-layout>
+  <Header />
+  <router-view></router-view>
 </template>
 
 <script>
-export default {
+import Header from "./components/Header.vue"
 
+export default {
+  components: {
+    Header
+  },
+  
 }
 </script>
 
-
+<style>
+</style>
