@@ -7,7 +7,7 @@
           <v-card class="pa-3 mt-5">
             <v-img :src="product.image" aspect-ratio="1"></v-img>
             <v-card-title> Funko Homem Aranha</v-card-title>
-            <v-card-title> 10x de R$22,60 </v-card-title>
+            <v-card-title class=""> 10x de R$22,60 </v-card-title>
             <v-card-text>R$226,00</v-card-text>
             <v-btn color="black">Adicionar</v-btn>
           </v-card>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   mounted() {
     this.loadProducts();
@@ -31,7 +32,7 @@ export default {
           console.log(response.data);
         })
         .catch(() => {
-          alert('Desculpe');
+          alert('Desculpe, não foi possível recuperar os produtos');
         });
     },
   },
