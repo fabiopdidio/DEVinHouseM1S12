@@ -1,50 +1,57 @@
 <template>
-  <div class="ma-4">
-    <h1>Produtos</h1>
-    <v-container>
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3>
-          <v-card class="pa-3 mt-5">
-            <v-img :src="product.image" aspect-ratio="1"></v-img>
-            <v-card-title> Funko Homem Aranha</v-card-title>
-            <v-card-title class=""> 10x de R$22,60 </v-card-title>
-            <v-card-text>R$226,00</v-card-text>
-            <v-btn color="black">Adicionar</v-btn>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+    <h1 class="ml-8 mt-4">Produtos</h1>
+    <div class="list-products">
+      <v-container>
+        <v-row>
+            <v-card class="pa-2 ma-2" width="30%" v-for="product in products" :key="product.id">
+              <v-img :src="product.imagem" aspect-ratio="1"></v-img>
+              <v-card-title>{{ product.nome }}</v-card-title>
+              <v-card-title>10x de {{ product.parcela }}</v-card-title>
+              <v-card-text>R$226,00</v-card-text>
+              <v-btn color="black" class="ma-4" @click="() => adicionarAoCarrinho(product)">Comprar</v-btn>
+            </v-card>
+        </v-row>
+      </v-container>
+    </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
+  data() {
+    return {
+      products: []
+    };
+  },
   mounted() {
     this.loadProducts();
   },
   methods: {
     loadProducts() {
-      axios
-        .get('http://localhost:3000/produtos')
+      axios({
+        url: 'http://localhost:3000/produtos',
+        method: 'GET'
+      })
         .then((response) => {
-          this.product = response.data;
+          this.products = response.data;
           console.log(response.data);
         })
         .catch(() => {
           alert('Desculpe, não foi possível recuperar os produtos');
         });
     },
-  },
-  data() {
-    return {
-      product: {
-        image:
-          'https://i5.walmartimages.com/seo/Funko-POP-Marvel-Spider-Man-FFH-Spider-Man-Upgraded-Suit_91441bc4-17a4-4712-80da-0f573275e2f8_1.066a3f627e0330deb26edda686b0b8f2.png?odnHeight=200&odnWidth=200&odnBg=FFFFFF',
-      },
-    };
-  },
+    adicionarAoCarrinho(product) {
+      // Lógica para adicionar o produto ao carrinho
+    }
+  }
 };
 </script>
 
-<style></style>
+<style>
+.list-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+</style>
