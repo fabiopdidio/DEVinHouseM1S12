@@ -25,6 +25,6 @@ a {
   text-decoration: none;
   font-size: 1.5em;
   color: black;
-  font-weight: bold;
+  font-weight: bolder;
 }
 </style>
