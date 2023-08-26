@@ -3,32 +3,58 @@
   <div class="list-products">
     <v-container>
       <v-row>
-          <v-card class="pa-2 ma-2" width="30%" v-for="product in products" :key="product.id" elevation="10">
-            <v-img :src="product.imagem" aspect-ratio="1"></v-img>
-            <v-card-title>{{ product.nome }}</v-card-title>
-            <v-card-title>10x de {{ product.parcela }}</v-card-title>
-            <v-card-text>R$226,00</v-card-text>
-            <v-btn color="success" class="ma-4" @click="() => adicionarAoCarrinho(product)">Comprar</v-btn>
-          </v-card>
+        <v-card
+          class="pa-2 ma-2"
+          width="30%"
+          v-for="product in products"
+          :key="product.id"
+          elevation="10"
+        >
+          <v-img :src="product.imagem" aspect-ratio="1"></v-img>
+          <v-card-title>{{ product.nome }}</v-card-title>
+          <v-card-title
+            >10x de
+            {{
+              new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
+                product.parcela
+              )
+            }}</v-card-title
+          >
+          <v-card-text>R$226,00</v-card-text>
+          <v-btn
+            color="success"
+            class="ma-4"
+            @click="() => this.$store.dispatch('adicionarProduto', { product })"
+          >
+            Comprar
+          </v-btn>
+        </v-card>
       </v-row>
     </v-container>
   </div>
 </template>
 
-
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   data() {
     return {
-      products: [],
-      produtosCarrinho: [],
-      messageNoEstadoGlobal: this.$store.state.message
-    };
+      products: []
+    }
+  },
+  computed: {
+    produtosRestantes() {
+     
+      return this.products.filter((product) => {
+        const itemExiste = this.$store.state.produtosCarrinho.find((item) => item.id === product.id)
+        if (itemExiste) return false
+        return true
+      })
+    }
   },
   mounted() {
-    this.loadProducts();
+    this.loadProducts()
   },
   methods: {
     loadProducts() {
@@ -37,17 +63,14 @@ export default {
         method: 'GET'
       })
         .then((response) => {
-          this.products = response.data;
-          console.log(response.data);
+          this.products = response.data
         })
         .catch(() => {
-          alert('Desculpe, não foi possível recuperar os produtos');
-        });
-    },
-    adicionarAoCarrinho(product) {
+          alert('Desculpe, não foi possivel recuperar os produtos')
+        })
     }
   }
-};
+}
 </script>
 
 <style>
