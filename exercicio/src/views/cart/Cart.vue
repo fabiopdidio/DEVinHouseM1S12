@@ -1,31 +1,15 @@
 <template>
-    <h1>CARRINHO</h1>
-  <v-card
-    class="mx-auto"
-    max-width="344"
-    variant="outlined"
-  >
-    <v-card-item>
-      <div>
-        <div class="text-h6 mb-1">
-          #
-          Produto
-          QTD
-          SubTotal
-        </div>
-        <div class="text-h8 mb-1">
-          Headline
-        </div>
-        <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
-      </div>
-    </v-card-item>
-
-    <v-card-actions>
-      <v-btn variant="outlined">
-        Button
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+  <div>CARINHO</div>
+  <v-container>
+    <v-table>
+      <tr>
+        <th class="text-left">Imagem</th>
+        <th class="text-left">Nome</th>
+        <th class="text-left">Preço</th>
+      </tr>
+      <tbody></tbody>
+    </v-table>
+  </v-container>
 </template>
 <script>
 export default {}

@@ -8,7 +8,7 @@
               <v-card-title>{{ product.nome }}</v-card-title>
               <v-card-title>10x de {{ product.parcela }}</v-card-title>
               <v-card-text>R$226,00</v-card-text>
-              <v-btn color="black" class="ma-4" @click="() => adicionarAoCarrinho(product)">Comprar</v-btn>
+              <v-btn color="pink" class="ma-4" @click="() => adicionarAoCarrinho(product)">Comprar</v-btn>
             </v-card>
         </v-row>
       </v-container>
